@@ -10,24 +10,31 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
 
-    map<string, int> names;
-    vector<string> res;
-    int n, m;
+    vector<string> names, res;
 
+    int n, m;
     cin >> n >> m;
-    for (int i = 0; i < n + m; i++)
+
+    for (int i = 0; i < n; i++)
     {
         string name;
         cin >> name;
-        
-        names[name]++;
-        if (names[name] > 1)
+        names.push_back(name);
+    }
+
+    sort(names.begin(), names.end());
+
+    for (int i = 0; i < m; i++)
+    {
+        string name;
+        cin >> name;
+        if (binary_search(names.begin(), names.end(), name))
             res.push_back(name);
     }
 
     sort(res.begin(), res.end());
 
     cout << res.size() << '\n';
-    for(auto n : res)
-        cout << n << '\n';
+    for (auto r : res)
+        cout << r << '\n';
 }
