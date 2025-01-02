@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <stack>
 using namespace std;
 
-void coutWord(vector<char> &word)
+void coutWord(stack<char> &word)
 {
-    for (int i = word.size() - 1; i > -1; i--)
+    while (!word.empty())
     {
-        cout << word[i];
-        word.pop_back();
+        cout << word.top();
+        word.pop();
     }
 }
 
@@ -19,7 +19,7 @@ int main()
     cout.tie(0);
 
     string str;
-    vector<char> word;
+    stack<char> word;
     bool inTag = false;
     char pastWord = 0;
 
@@ -54,10 +54,10 @@ int main()
         else if (i == str.length() - 1)
         {
             if (pastWord == 'w') cout << ' ';
-            word.push_back(str[i]);
+            word.push(str[i]);
             coutWord(word);
             return 0;
         }
-        word.push_back(str[i]);
+        word.push(str[i]);
     }
 }
