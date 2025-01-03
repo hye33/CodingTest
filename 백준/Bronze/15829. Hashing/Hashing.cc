@@ -2,11 +2,11 @@
 #include <string>
 using namespace std;
 
-int square(int a, int b)
+long long square(int a, int b)
 {
-    int res = 1;
+    long long res = 1;
     for (int i = 0; i < b; i++)
-        res = res * a;
+        res = (res * a) % 1234567891;
     return res;
 }
 
@@ -20,11 +20,10 @@ int main()
     string str;
     cin >> l >> str;
 
-    unsigned int hash = 0;
+    long long hash = 0;
     for (int i = 0; i < l; i++)
     {
-        unsigned int add = (str[i] - 'a' + 1) * square(31, i);
-        hash += add;
+        hash = (hash + ((str[i] - 'a' + 1) * square(31, i))) % 1234567891;
     }
     hash = hash % 1234567891;
     cout << hash;
