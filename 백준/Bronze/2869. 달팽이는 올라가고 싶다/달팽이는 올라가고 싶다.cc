@@ -10,9 +10,8 @@ int main()
     int a, b, v, day = 1;
     cin >> a >> b >> v;
 
-    int add = (v - a) / (a - b);
+    day += (v - a) / (a - b);
     if ((v - a) % (a - b) != 0) day++;
-    day += add;
 
     cout << day;
 }
