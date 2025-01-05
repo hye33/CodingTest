@@ -1,15 +1,14 @@
 #include <iostream>
-#include <map>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-bool comp(pair<string, int> &a, pair<string, int> &b)
+bool comp(string &a, string &b)
 {
-    if (a.first.length() == b.first.length())
+    if (a.length() == b.length())
         return a < b;
     else
-        return a.first.length() < b.first.length();
+        return a.length() < b.length();
 }
 
 int main()
@@ -20,17 +19,17 @@ int main()
 
     int n;
     string w;
-    map<string, int> words;
+    vector<string> words;
     cin >> n;
     for (int i = 0; i < n; i++)
     {
         cin >> w;
-        words[w]++;
+        words.push_back(w);
     }
 
-    vector<pair<string, int>> v(words.begin(), words.end());
-    sort(v.begin(), v.end(), comp);
+    sort(words.begin(), words.end(), comp);
+    words.erase(unique(words.begin(), words.end()), words.end());
 
-    for (auto res : v)
-        cout << res.first << '\n';
+    for (auto res : words)
+        cout << res << '\n';
 }
