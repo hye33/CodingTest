@@ -22,7 +22,7 @@ int main()
     {
         int input;
         cin >> input;
-        if (cards.find(input) != cards.end())
+        if (cards.count(input))
             cout << cards[input] << " ";
         else
             cout << "0 ";
