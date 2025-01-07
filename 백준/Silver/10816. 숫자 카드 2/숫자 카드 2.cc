@@ -22,7 +22,9 @@ int main()
     {
         int input;
         cin >> input;
-        cards[input]++;
-        cout << --cards[input] << " ";
+        if (cards.find(input) != cards.end())
+            cout << cards[input] << " ";
+        else
+            cout << "0 ";
     }
 }
