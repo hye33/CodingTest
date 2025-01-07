@@ -20,7 +20,5 @@ int main()
         cards.push(cards.front());
         cards.pop();
     }
-    if (cards.size() != 1) cards.pop();
-    cout << cards.front();
-    
+    cout << cards.back();
 }
