@@ -3,7 +3,6 @@
 #include <stack>
 using namespace std;
 
-int dp[5001];
 int main()
 {
     ios::sync_with_stdio(false);
