@@ -25,13 +25,13 @@ int main()
     }
 
     sort(v.begin(), v.end());
-    int excp = floor(float(n) * 0.15 + 0.5);
+    int excp = round(float(n) * 0.15);
 
     for (int i = excp; i < n - excp; i++)
     {
         sum += v[i];
     }
 
-    int res = floor(float(sum) / (n - excp * 2) + 0.5);
+    int res = round(float(sum) / (n - excp * 2));
     cout << res;
 }
