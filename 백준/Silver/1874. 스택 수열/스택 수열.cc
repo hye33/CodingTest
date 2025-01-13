@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <stack>
 using namespace std;
 
@@ -11,37 +10,27 @@ int main()
 
     int n;
     cin >> n;
-    vector<int> v(n);
     stack<int> s;
-    vector<char> res;
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
+    string res ="";
 
     int pnt = 1;
     for (int i = 0; i < n; i++)
     {
-        if (v[i] < pnt)
+        int input;
+        cin >> input;
+        while(input >= pnt)
         {
-            if (s.empty() || v[i] != s.top())
-            {
-                cout << "NO";
-                return 0;
-            }
-            s.pop();
-            res.push_back('-');
-            continue;
+            res += "+\n";
+            s.push(pnt++);
         }
-        while(v[i] > pnt)
+        if (input != s.top())
         {
-            res.push_back('+');
-            s.push(pnt);
-            pnt++;
+            cout << "NO";
+            return 0;
         }
-        res.push_back('+');
-        res.push_back('-');
-        pnt++;
+        s.pop();
+        res += "-\n";
     }
 
-    for (auto r : res)
-        cout << r << '\n';
+    cout << res;
 }
