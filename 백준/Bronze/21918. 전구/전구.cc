@@ -1,7 +1,7 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
+bool v[4001];
 int main()
 {
     ios::sync_with_stdio(false);
@@ -10,13 +10,8 @@ int main()
 
     int n, m;
     cin >> n >> m;
-    vector<bool> v(n);
     for (int i = 0; i < n; i++)
-    {
-        bool input;
-        cin >> input;
-        v[i] = input;
-    }
+        cin >> v[i];
     while(m--)
     {
         int method, a, b;
