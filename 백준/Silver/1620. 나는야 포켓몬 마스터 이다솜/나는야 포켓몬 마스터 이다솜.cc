@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cctype>
 #include <string>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
 string ntoe[100001];
-map<string, int> eton;
+unordered_map<string, int> eton;
 
 int main()
 {
