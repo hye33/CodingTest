@@ -2,16 +2,6 @@
 #include <queue>
 using namespace std;
 
-struct comp
-{
-    bool operator()(pair<int, int> &a, pair<int, int> &b)
-    {
-        if (a.first == b.first)
-            return a.second > b.second;
-        return a.first > b.first;
-    }
-};
-
 int main()
 {
     ios::sync_with_stdio(false);
@@ -20,7 +10,7 @@ int main()
 
     int n, x;
     cin >> n;
-    priority_queue<pair<int, int>, vector<pair<int, int>>, comp> q;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> q;
     while(n--)
     {
         cin >> x;
