@@ -1,6 +1,13 @@
 #include <iostream>
 using namespace std;
 
+long long gcd(long long a, long long b)
+{
+    if (a % b == 0)
+        return b;
+    return gcd(b, a % b);
+}
+
 int main()
 {
     ios::sync_with_stdio(false);
@@ -12,13 +19,6 @@ int main()
     while(n--)
     {
         cin >> a >> b;
-        for (long long i = max(a, b); i <= a * b; i += max(a, b))
-        {
-            if ((i % a == 0) && (i % b == 0))
-            {
-                cout << i << '\n';
-                break;
-            }
-        }
+        cout << (a * b) / (a > b ? gcd(a, b) : gcd(b, a)) << '\n';
     }
 }
