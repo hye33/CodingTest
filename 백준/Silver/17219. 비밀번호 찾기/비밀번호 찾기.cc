@@ -1,8 +1,8 @@
 #include <iostream>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
-map<string, string> arr;
+unordered_map<string, string> arr;
 
 int main()
 {
