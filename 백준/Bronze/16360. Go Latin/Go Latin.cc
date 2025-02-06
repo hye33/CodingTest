@@ -13,53 +13,29 @@ int main()
     while(n--)
     {
         cin >> word;
-        char c = word[word.length() - 1];
-        int len = word.length();
-        string res;
-        switch (c)
+        char c = word.back();
+        word.pop_back();
+        if (c == 'a') word += "as";
+        else if (c == 'i' || c == 'y') word += "ios";
+        else if (c == 'l') word += "les";
+        else if (c == 'n') word += "anes";
+        else if (c == 'e' && word.back() == 'n')
         {
-        case 'a':
-            res = word.substr(0, len - 1) + "as";
-            break;
-        case 'i':
-        case 'y':
-            res = word.substr(0, len - 1) + "ios";
-            break;
-        case 'l':
-            res = word.substr(0, len - 1) + "les";
-            break;
-        case 'n':
-            res = word.substr(0, len - 1) + "anes";
-            break;
-        case 'o':
-            res = word.substr(0, len - 1) + "os";
-            break;
-        case 'r':
-            res = word.substr(0, len - 1) + "res";
-            break;
-        case 't':
-            res = word.substr(0, len - 1) + "tas";
-            break;
-        case 'u':
-            res = word.substr(0, len - 1) + "us";
-            break;
-        case 'v':
-            res = word.substr(0, len - 1) + "ves";
-            break;
-        case 'w':
-            res = word.substr(0, len - 1) + "was";
-            break;
-        case 'e':
-            if (word[len - 2] == 'n')
-                res = word.substr(0, len - 2) + "anes";
-            else
-                res = word + "us";
-            break;
-        default:
-            res = word + "us";
-            break;
+            word.pop_back();
+            word += "anes";
+        }
+        else if (c == 'o') word += "os";
+        else if (c == 'r') word += "res";
+        else if (c == 't') word += "tas";
+        else if (c == 'u') word += "us";
+        else if (c == 'v') word += "ves";
+        else if (c == 'w') word += "was";
+        else
+        {
+            word += c;
+            word += "us";
         }
 
-        cout << res << '\n';
+        cout << word << '\n';
     }
 }
