@@ -8,33 +8,21 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
-    int res = 0, buf = 0;
     string str, num;
+    int sum = 0;
     cin >> str;
-    bool inMinus = false;
+    bool minus = false;
     for (int i = 0; i < str.length(); i++)
     {
-        if (str[i] == '+')
+        if (str[i] == '+' || str[i] == '-')
         {
-            if (inMinus) buf += stoi(num);
-            else res += stoi(num);
+            sum += (minus ? -stoi(num) : stoi(num));
+            if (str[i] == '-') minus = true;
             num = "";
-        }
-        else if (str[i] == '-')
-        {
-            if (inMinus) buf += stoi(num);
-            else res += stoi(num);
-            res -= buf;
-            buf = 0;
-            num = "";
-            inMinus = true;
         }
         else
             num += str[i];
     }
-    res -= buf;
-    if (inMinus) res -= stoi(num);
-    else res += stoi(num);
-
-    cout << res;
+    sum += (minus ? -stoi(num) : stoi(num));
+    cout << sum;
 }
