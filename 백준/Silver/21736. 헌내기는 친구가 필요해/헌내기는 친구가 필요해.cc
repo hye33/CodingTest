@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 char arr[601][601];
@@ -8,13 +9,25 @@ int n, m, ix, iy, cnt = 0;
 int dy[4] = { 1, -1, 0, 0 };
 int dx[4] = { 0, 0, 1, -1 };
 
-void dfs(int y, int x)
+void bfs(int y, int x)
 {
-    if (y < 0 || y >= n || x < 0 || x >= m || visit[y][x] || arr[y][x] == 'X') return;
-    if (arr[y][x] == 'P') cnt++;
-    visit[y][x] = true;
-    for (int i = 0; i < 4; i++)
-        dfs(y + dy[i], x + dx[i]);
+    queue<pair<int, int>> q;
+    q.push(make_pair(y, x));
+    while(!q.empty())
+    {
+        pair<int, int> f = q.front();
+        q.pop();
+        for (int i = 0; i < 4; i++)
+        {
+            int ny = f.first + dy[i];
+            int nx = f.second + dx[i];
+            if (ny < 0 || ny >= n || nx < 0 || nx >= m || visit[ny][nx] || arr[ny][nx] == 'X')
+                continue;
+            if (arr[ny][nx] == 'P') cnt++;
+            visit[ny][nx] = true;
+            q.push(make_pair(ny, nx));
+        }
+    }
 }
 
 int main()
@@ -36,7 +49,7 @@ int main()
         }
     }
 
-    dfs(iy, ix);
+    bfs(iy, ix);
     if (cnt) cout << cnt;
     else cout << "TT";
 }
