@@ -1,10 +1,7 @@
 #include <iostream>
-#include <map>
+#include <vector>
+#include <algorithm>
 using namespace std;
-
-int n;
-map<int, int> s;
-int arr[1000001];
 
 int main()
 {
@@ -12,17 +9,16 @@ int main()
     cin.tie(0);
     cout.tie(0);
 
+    int n;
     cin >> n;
+    vector<int> v(n);
     for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-        s[arr[i]] = -1;
-    }
+        cin >> v[i];
+    
+    vector<int> ordered(v);
+    sort(ordered.begin(), ordered.end());
+    ordered.erase(unique(ordered.begin(), ordered.end()), ordered.end());
 
-    int cnt = 0;
-    for (auto &target : s)
-        target.second = cnt++;
-
-    for (int i = 0; i < n; i++)
-        cout << s[arr[i]] << ' ';
+    for (auto& target : v)
+        cout << lower_bound(ordered.begin(), ordered.end(), target) - ordered.begin() << ' ';
 }
