@@ -1,39 +1,7 @@
 #include <iostream>
-#include <vector>
-#include <queue>
 using namespace std;
 
-vector<int> v[101];
-
-int bfs(int start, int target, bool visited[101])
-{
-    queue<pair<int, int>> q;
-    q.push(make_pair(0, start));
-    visited[start] = true;
-
-    int level = -1;
-    while(!q.empty())
-    {
-        pair<int, int> cur = q.front();
-        q.pop();
-        
-        if (target == cur.second)
-        {
-            level = cur.first;
-            break;
-        }
-
-        for (int i = 0; i < v[cur.second].size(); i++)
-        {
-            if (!visited[v[cur.second][i]])
-            {
-                q.push(make_pair(cur.first + 1, v[cur.second][i]));
-                visited[v[cur.second][i]] = true;
-            }
-        }
-    }
-    return level;
-}
+int dist[101][101];
 
 int main()
 {
@@ -43,13 +11,23 @@ int main()
 
     int n, m, minCount = 100000, minP = 0;
     cin >> n >> m;
-    while(m--)
+
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= n; j++)
+            dist[i][j] = 100;
+
+    while (m--)
     {
         int a, b;
         cin >> a >> b;
-        v[a].push_back(b);
-        v[b].push_back(a);
+        dist[a][b] = 1;
+        dist[b][a] = 1;
     }
+
+    for (int k = 1; k <= n; k++)
+        for (int i = 1; i <= n; i++)
+            for (int j = 1; j <= n; j++)
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
 
     for (int i = 1; i <= n; i++)
     {
@@ -57,8 +35,7 @@ int main()
         for (int j = 1; j <= n; j++)
         {
             if (i == j) continue;
-            bool visited[101] = {0};
-            count += bfs(i, j, visited);
+            count += dist[i][j];
         }
         if (count < minCount)
         {
@@ -66,5 +43,6 @@ int main()
             minP = i;
         }
     }
+
     cout << minP;
 }
